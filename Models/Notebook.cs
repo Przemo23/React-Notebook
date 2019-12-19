@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace NTR4_backend.Models
+namespace Notebook.Models
 {
     public static class Notebook
     {
@@ -16,7 +16,7 @@ namespace NTR4_backend.Models
             Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
             AllNotes = new List<Note>();
             AllCategories = new List<string>();
-            DirectoryName = "C:\\Users\\mateu\\RiderProjects\\NTR4_backend\\NTR4_backend\\Notes";
+            DirectoryName = "C:\\Users\\01133297\\RiderProjects\\Notebook\\Notebook\\Notes";
             initializeNotes();
         }
 
@@ -38,6 +38,7 @@ namespace NTR4_backend.Models
                 string textLine;
                 note.Categories = takeCategories(file);
                 note.Date = takeDate(file);
+                note.DateFormatted = note.Date.ToString("MM/dd/yyyy");
                 note.Title = name.Substring(name.LastIndexOf('\\')+1, name.LastIndexOf('.') - name.LastIndexOf('\\')-1);
                 note.FileType = name.Substring(name.LastIndexOf('.')+1);
                 while ((textLine = file.ReadLine()) != null)

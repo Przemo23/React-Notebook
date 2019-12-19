@@ -4,9 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using NTR4_backend.Models;
+using Notebook.Models;
 
-namespace NTR4_backend.Controllers
+namespace Notebook.Controllers
 {
     [Route("api/[controller]")]
     public class SampleDataController : Controller
@@ -15,25 +15,25 @@ namespace NTR4_backend.Controllers
         [HttpGet("[action]")]
         public IEnumerable<Note> AllNotes()
         {
-            return Notebook.AllNotes;
+            return Models.Notebook.AllNotes;
         }
 
         [HttpPost("[action]")]
-        public void CreateNote([Bind("Categories, Title, Content, Date, FileType")]  Note note)
+        public void CreateNote([Bind("Categories, Title, Content, Date, IsMarkdown")]  Note note)
         {
             Note newNote = new Note(note);
             for (int i = 1; !isTitleUnique(newNote); i++)
                 newNote.Title = note.Title + "(" + i + ")";
             newNote.DateFormatted = newNote.Date.ToString("mm/dd/yyyy");
-            Notebook.AllNotes.Add(newNote);
+            Models.Notebook.AllNotes.Add(newNote);
             createFile(newNote);
         }
 
 
         [HttpPut("[action]")]
-        public void EditNote([Bind("Categories, Title, Content, Date, FileType, ID")] Note note)
+        public void EditNote([Bind("Categories, Title, Content, Date, IsMarkdown, ID")] Note note)
         {
-            Note updatedNote = Notebook.AllNotes.Find(n => n.ID == note.ID);
+            Note updatedNote = Models.Notebook.AllNotes.Find(n => n.Id == note.Id);
             deleteFile(updatedNote);
             updatedNote.update(note);
             updatedNote.DateFormatted = updatedNote.Date.ToString("mm/dd/yyyy");
@@ -45,14 +45,14 @@ namespace NTR4_backend.Controllers
         [HttpDelete("[action]")]
         public void DeleteNote(int id)
         {
-            Note deletedNote = Notebook.AllNotes.Find(note => note.ID == id);
+            Note deletedNote = Models.Notebook.AllNotes.Find(note => note.Id == id);
             deleteFile(deletedNote);
-            Notebook.AllNotes.Remove(deletedNote);
+            Models.Notebook.AllNotes.Remove(deletedNote);
         }
 
         private void createFile(Note note)
         {
-            string path = Path.Combine(Notebook.DirectoryName, note.Title + "." + note.FileType);
+            string path = Path.Combine(Models.Notebook.DirectoryName, note.Title + "." + note.FileType);
             string data = "category:";
             foreach (string category in note.Categories)
                 data += category + ' ';
@@ -61,10 +61,10 @@ namespace NTR4_backend.Controllers
         }
         private void deleteFile(Note note)
         {
-            string path = Path.Combine(Notebook.DirectoryName, note.Title + "." + note.FileType);
+            string path = Path.Combine(Models.Notebook.DirectoryName, note.Title + "." + note.FileType);
             System.IO.File.Delete(path);
         }
-        private bool isTitleUnique(Note note) => Notebook.AllNotes.Find(n => n.Title == note.Title && n.ID != note.ID) == null;
+        private bool isTitleUnique(Note note) => Models.Notebook.AllNotes.Find(n => n.Title == note.Title && n.Id != note.Id) == null;
 
     }
 }

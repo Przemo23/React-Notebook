@@ -3,6 +3,7 @@ import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 
 
+
 class Filtr extends Component {
  
     state = {
@@ -36,11 +37,19 @@ class Filtr extends Component {
         })
     };
     handleSubmit = (event) =>{
-        event.preventDefault();
+        
         this.props.changeFilters(this.state.fromDate,this.state.toDate,this.state.filterCategory,true)
+        event.preventDefault();
         
     };
+    getParsedDate = (date)=>{
+        const days = date.getDay().toString();
+        const months = date.getMonth().toString();
+        const years = date.getFullYear().toString();
+        return (years + '-' + months + '-' + days)
+    }
     render () {
+        console.log(this.state);
         return (
             <form onSubmit={ this.handleSubmit.bind(this)}>
                 <Table striped >
@@ -48,17 +57,17 @@ class Filtr extends Component {
                     <tr>
                         <th>
                             From:
-                            <input type = "date" name = "from" onChange={this.handleFromChange} value = {this.props.fromDate.toISOString().substr(0,10)}/>
+                            <input type = "date" name = "from" onChange={this.handleFromChange} />
                         </th>
 
                         <th>
                             To:
-                            <input type = "date" name = "to" onChange={this.handleToChange} value = {this.props.toDate.toISOString().substr(0,10)}/>
+                            <input type = "date" name = "to" onChange={this.handleToChange}/>
                         </th>
                         <th>
                             Category:
                             <select name = "category" onChange={this.handleCategoryChange}>
-                                <option value="none">''</option>
+                                <option value="none">{''}</option>
                                 <option value="grapefruit">Grapefruit</option>
                                 <option value="lime">Lime</option>
                                 <option default value="coconut">Coconut</option>

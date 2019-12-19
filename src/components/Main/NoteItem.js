@@ -19,10 +19,10 @@ class NoteItem extends Component {
     }
     
     render () {
-        console.log(this.props);
+       
         return (
             <tr style = {this.getStyle()}>
-                <td>{this.props.note.date.toISOString().substring(0,10)}</td>
+                <td>{this.props.note.dateFormatted}</td>
                 <td>{this.props.note.title}</td>
                 <td>
                     <Link to={{

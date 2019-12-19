@@ -15,7 +15,7 @@ class EditPage extends Component {
     }
 
     render () {
-        console.log(this.props.note.date);
+        console.log(this.props.note);
         return (
             <div style = {this.getStyle()}>
                 <Link to = "/"> Back </Link>

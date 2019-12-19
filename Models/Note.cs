@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace NTR4_backend.Models
+namespace Notebook.Models
 {
     public class Note
     {
-        public static int currentID = 0;
+        public static int currentID =1;
         public List<string> Categories { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
         public DateTime Date { get; set; }
         public string DateFormatted { get; set; }
         public string FileType { get; set; }
-        public int ID { get; }
+        public int Id { get; }
 
         public Note()
         {
@@ -21,13 +21,13 @@ namespace NTR4_backend.Models
             Date = DateTime.Now;
             DateFormatted = Date.ToString("d");
             Categories = new List<string>();
-            ID = currentID++;
+            Id = currentID++;
         }
 
         public Note(Note note)
         {
             this.update(note);
-            ID = currentID++;
+            Id = currentID++;
         }
 
         public void update(Note note)

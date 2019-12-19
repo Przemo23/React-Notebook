@@ -6,7 +6,7 @@ import Table from "react-bootstrap/Table";
 class Notes extends Component {
     
     render () {
-        
+        console.log(this.props);
         return(
             
             <Table striped bordered hover>

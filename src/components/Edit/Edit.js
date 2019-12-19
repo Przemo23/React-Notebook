@@ -2,40 +2,22 @@
 import EditPage from "./EditPage";
 
 class Edit extends Component {
-    
-    
-    state = {
+    constructor(props) {
+        super(props);
+        this.state = {notes: [],loading:true};
 
-        notes:[
-            {
-                title: 'Notatka1',
-                category: 'Jeden',
-                text: 'Jeden',
-                date: new Date(2019,12,19),
-                isMarkdown: true,
-                id:1
-            },
-            {
-                title: 'Notatka2',
-                category: 'Trzy',
-                text: 'Dwa',
-                date: new Date(2020,5,12),
-                isMarkdown: true,
-                id:2
-            },
-            {
-                title: 'Notatka3',
-                category: 'Trzy',
-                text: 'Trzy',
-                date: new Date(2019,12,24),
-                isMarkdown: true,
-                id:3
-            }
-        ],
-
-    };
+        fetch('api/SampleData/AllNotes')
+            .then(response => response.json())
+            .then(data => {
+                this.setState({ notes: data,
+                    loading: false
+                     });
+            });
+    }
     
+   
     render () {
+        console.log(this.state);
         return (
             <div>
                 <EditPage note = {this.state.notes.find(this.findInArray.bind(this))}/>

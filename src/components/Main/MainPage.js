@@ -1,47 +1,35 @@
 import React, { Component } from 'react';
 import Filtr from './Filtr'
 import Notes from "./Notes";
+import moment from 'react-moment';
 
 
 
 export class MainPage extends Component {
-  static displayName = MainPage.name;
-    state = {
+    constructor(props) {
+        super(props);
+        this.state = {notes: [],loading:true,fromFilter:'',toFilter: '',categoryFilter: '',isFilterOn: ''};
 
-        notes:[
-            {
-                title: 'Notatka1',
-                category: 'Jeden',
-                text: 'Jeden',
-                date: new Date(2019,2,19),
-                isMarkdown: true,
-                id: 1
-            },
-            {
-                title: 'Notatka2',
-                category: 'Trzy',
-                text: 'Dwa',
-                date: new Date(2020,5,12),
-                isMarkdown: true,
-                id: 2
-            },
-            {
-                title: 'Notatka3',
-                category: 'Trzy',
-                text: 'Trzy',
-                date: new Date(2019,3,24),
-                isMarkdown: true,
-                id: 3
-            }
-        ],
-        fromFilter: new Date(2019,3,24),
-        toFilter: new Date(2019,3,24),
-        categoryFilter: "none",
-        isFilterOn: false,
-
-    };
+        fetch('api/SampleData/AllNotes')
+            .then(response => response.json())
+            .then(data => {
+                this.setState({ notes: data,
+                                    loading: false,
+                                    fromFilter: new Date(2019,3,24),
+                                    toFilter: new Date(2019,3,24),
+                                    categoryFilter: "none",
+                                    isFilterOn: false, });
+            });
+    }
+    static displayName = MainPage.name;
+    
+    
+      
+    
     filterNotes = (note) =>{
-        return note.date >= this.state.fromFilter && note.date <= this.state.toFilter && this.state.categoryFilter === note.category
+        console.log(note.date);
+        return (
+            ( this.state.categoryFilter === note.category || this.state.categoryFilter !==  ''))
     };
     passNotes = () =>{
         if(this.state.isFilterOn === false)
@@ -60,7 +48,7 @@ export class MainPage extends Component {
         }})
     };
   render () {
-      console.log(this.props);
+      
     return (
       
       <div>
@@ -71,7 +59,7 @@ export class MainPage extends Component {
               toDate = {this.state.toFilter}
               categoryFilter = {this.state.categoryFilter}
           />
-          <Notes notes = {this.passNotes()} />
+          <Notes notes = {this.state.notes} />
       </div>
     );
   }
