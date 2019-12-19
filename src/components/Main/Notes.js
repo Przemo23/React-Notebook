@@ -1,12 +1,14 @@
 ﻿import React, { Component } from 'react';
 import NoteItem from "./NoteItem";
-import PropTypes from 'prop-types'
 import Table from "react-bootstrap/Table";
 
 
 class Notes extends Component {
+    
     render () {
+        
         return(
+            
             <Table striped bordered hover>
                 <thead>
                 <tr>
@@ -26,8 +28,5 @@ class Notes extends Component {
     }
 }
 
-//PropTypes
-Notes.propTypes = {
-    notes: PropTypes.array.isRequired
-}
+
 export default Notes;

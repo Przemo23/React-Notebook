@@ -5,6 +5,7 @@ import Link from "react-router-dom/Link"
 
 
 class EditPage extends Component {
+    
     getStyle = () =>{
         return {
             backgroundColor: '#f4f4f4',
@@ -14,26 +15,26 @@ class EditPage extends Component {
     }
 
     render () {
-        console.log(this.props);
+        console.log(this.props.note.date);
         return (
             <div style = {this.getStyle()}>
                 <Link to = "/"> Back </Link>
                 <p>
                     Title: {" "}
-                    <input type = "text" name = "title"/>
+                    <input type = "text" name = "title" value = {this.props.note.title}/>
                     {"     Date: "}
-                    <input type = "date" name = "date"/>
+                    <input type = "date" name = "date" defaultValue= {this.props.note.date.toISOString().substr(0,10)}/>
                     {"     Markdown: "}
-                    <input type = "checkbox" name = "markdown"/>
+                    <input type = "checkbox" name = "markdown" defaultChecked={this.props.note.isMarkdown}/>
                 </p>
-                <textarea name = "text"/>
+                <textarea name = "text" value={this.props.note.text}/>
                 <p>
                     <input type = "text" name = "category"/>
                     {"  "}
                     <select name = "categories">
                         <option value="grapefruit">Grapefruit</option>
                         <option value="lime">Lime</option>
-                        <option selected value="coconut">Coconut</option>
+                        <option default value="coconut">Coconut</option>
                         <option value="mango">Mango</option>
                     </select>
                     {"  "}

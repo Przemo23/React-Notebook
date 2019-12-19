@@ -4,14 +4,7 @@ import Link from "react-router-dom/Link";
 
 
 class NoteItem extends Component {
-    
-    getUrl  = () =>{
-        const noteId = '' + this.props.note.id;
-        const url = 'Edit/${noteId}';
-        return {
-            pathname: {url}
-        }
-    };
+   
    
     getStyle = () =>{
         return {
@@ -20,11 +13,16 @@ class NoteItem extends Component {
             borderBottom:'1px #ccc dotted',
         }
     };
+    getStringDate = (date) =>{
+        return date.getFullYear().toString() + '-' + date.getMonth().toString() + '-' +date.getDay().toString();
+        
+    }
     
     render () {
+        console.log(this.props);
         return (
             <tr style = {this.getStyle()}>
-                <td>{this.props.note.date}</td>
+                <td>{this.props.note.date.toISOString().substring(0,10)}</td>
                 <td>{this.props.note.title}</td>
                 <td>
                     <Link to={{
