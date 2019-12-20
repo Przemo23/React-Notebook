@@ -13,6 +13,8 @@ namespace Notebook.Models
         public string DateFormatted { get; set; }
         public string FileType { get; set; }
         public int Id { get; }
+        
+        public bool IsMarkdown { get; set; }
 
         public Note()
         {

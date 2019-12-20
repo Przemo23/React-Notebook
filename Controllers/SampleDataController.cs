@@ -17,6 +17,11 @@ namespace Notebook.Controllers
         {
             return Models.Notebook.AllNotes;
         }
+        [HttpGet("[action]")]
+        public IEnumerable<String> AllCategories()
+        {
+            return Models.Notebook.AllCategories;
+        }
 
         [HttpPost("[action]")]
         public void CreateNote([Bind("Categories, Title, Content, Date, IsMarkdown")]  Note note)

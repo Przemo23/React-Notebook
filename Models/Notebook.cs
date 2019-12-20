@@ -41,6 +41,8 @@ namespace Notebook.Models
                 note.DateFormatted = note.Date.ToString("MM/dd/yyyy");
                 note.Title = name.Substring(name.LastIndexOf('\\')+1, name.LastIndexOf('.') - name.LastIndexOf('\\')-1);
                 note.FileType = name.Substring(name.LastIndexOf('.')+1);
+                note.IsMarkdown = note.FileType != "txt";
+                
                 while ((textLine = file.ReadLine()) != null)
                     note.Content += textLine;
             }

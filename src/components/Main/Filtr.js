@@ -6,12 +6,13 @@ import Button from "react-bootstrap/Button";
 
 class Filtr extends Component {
  
-    state = {
-        fromDate: '',
-        toDate: '',
-        filterCategory: '',
-            
+    constructor(props) {
+        super(props);
+        this.state = {fromDate: new Date(),
+            toDate: new Date(),
+            filterCategory: '',}
     }
+    
     
     getStyle = () =>{
         return {
@@ -42,6 +43,9 @@ class Filtr extends Component {
         event.preventDefault();
         
     };
+    handleDeleteFilter = () =>{
+        this.props.changeFilters(this.state.fromDate,this.state.toDate,'',false)
+    }
     getParsedDate = (date)=>{
         const days = date.getDay().toString();
         const months = date.getMonth().toString();
@@ -49,7 +53,6 @@ class Filtr extends Component {
         return (years + '-' + months + '-' + days)
     }
     render () {
-        console.log(this.state);
         return (
             <form onSubmit={ this.handleSubmit.bind(this)}>
                 <Table striped >
@@ -57,24 +60,25 @@ class Filtr extends Component {
                     <tr>
                         <th>
                             From:
-                            <input type = "date" name = "from" onChange={this.handleFromChange} />
+                            <input type = "date" name = "from" value = {new Date(this.state.fromDate).toISOString().substr(0,10)} onChange={this.handleFromChange} />
                         </th>
 
                         <th>
                             To:
-                            <input type = "date" name = "to" onChange={this.handleToChange}/>
+                            <input type = "date" name = "to" value = {new Date(this.state.toDate).toISOString().substr(0,10)} onChange={this.handleToChange}/>
                         </th>
                         <th>
                             Category:
                             <select name = "category" onChange={this.handleCategoryChange}>
                                 <option value="none">{''}</option>
-                                <option value="grapefruit">Grapefruit</option>
-                                <option value="lime">Lime</option>
-                                <option default value="coconut">Coconut</option>
-                                <option value="mango">Mango</option>
+                                {this.props.categories.map((category)=>
+                                        <option>
+                                            {category}
+                                        </option>)}
                             </select>
                             <Button variant = "primary" type = "submit">Filter</Button>
-                            <Button variant = "danger">Delete Filter</Button>
+                            <Button variant = "danger" onClick = {this.handleDeleteFilter}>Delete Filter</Button>
+                            
                         </th>
                     </tr>
                     </thead>
