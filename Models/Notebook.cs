@@ -16,7 +16,7 @@ namespace Notebook.Models
             Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
             AllNotes = new List<Note>();
             AllCategories = new List<string>();
-            DirectoryName = "C:\\Users\\01133297\\RiderProjects\\Notebook\\Notebook\\Notes";
+            DirectoryName = "C:\\Users\\mateu\\RiderProjects\\Notebook\\Notebook\\Notes";
             initializeNotes();
         }
 

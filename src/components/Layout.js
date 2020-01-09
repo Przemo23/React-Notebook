@@ -7,11 +7,15 @@ export class Layout extends Component {
 
     render () {
         return (
-            <div>
+            <div style={{backgroundColor:'#cdb585'}}>
                 <Container>
                     {this.props.children}
                 </Container>
+                <footer>
+                    <p>&copy; Mateusz Marciniewicz - a NIE Macinkiewicz</p>
+                </footer>
             </div>
+            
         );
     }
 }

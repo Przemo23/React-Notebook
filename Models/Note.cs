@@ -28,8 +28,8 @@ namespace Notebook.Models
 
         public Note(Note note)
         {
+            this.Id = note.Id;
             this.update(note);
-            Id = currentID++;
         }
 
         public void update(Note note)
@@ -38,6 +38,8 @@ namespace Notebook.Models
             this.Content = note.Content;
             this.Title = note.Title;
             this.Date = note.Date;
+            this.DateFormatted = note.DateFormatted;
+            this.FileType = this.IsMarkdown == true ? "md" : "txt";
         }
     }
 }

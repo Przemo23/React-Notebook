@@ -78,9 +78,10 @@ class Filtr extends Component {
                                             {category}
                                         </option>)}
                             </select>
-                            <Button variant = "primary" type = "submit">Filter</Button>
-                            <Button variant = "danger" onClick = {this.handleDeleteFilter}>Delete Filter</Button>
-                            
+                        </th>
+                        <th>
+                            <Button variant = "secondary" type = "submit">Filter</Button>
+                            <Button variant = "secondary" onClick = {this.handleDeleteFilter}>Clear</Button>
                         </th>
                     </tr>
                     </thead>

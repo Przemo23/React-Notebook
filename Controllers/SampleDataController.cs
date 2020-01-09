@@ -31,14 +31,13 @@ namespace Notebook.Controllers
             Note newNote = new Note(note);
             for (int i = 1; !isTitleUnique(newNote); i++)
                 newNote.Title = note.Title + "(" + i + ")";
-            newNote.DateFormatted = newNote.Date.ToString("mm/dd/yyyy");
             Models.Notebook.AllNotes.Add(newNote);
             createFile(newNote);
         }
 
 
         [HttpPut("[action]")]
-        public void EditNote([Bind("Categories, Title, Content, Date, IsMarkdown, ID")][FromBody]Note note)
+        public void EditNote([FromBody]Note note)
         {
             Note updatedNote = Models.Notebook.AllNotes.Find(n => n.Id == note.Id);
             deleteFile(updatedNote);
@@ -66,7 +65,7 @@ namespace Notebook.Controllers
             string data = "category:";
             foreach (string category in note.Categories)
                 data += category + ' ';
-            data += '\n' + "date:" + note.Date.ToString("mm/dd/yyyy") + '\n' + note.Content;
+            data += '\n' + "date:" + note.Date.ToString("MM/dd/yyyy") + '\n' + note.Content;
             System.IO.File.WriteAllText(path, data);
         }
         private void deleteFile(Note note)

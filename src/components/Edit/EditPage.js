@@ -87,37 +87,39 @@ class EditPage extends Component {
     render () {
         console.log(this.state);
         return (
-            <form onSubmit={this.handleSubmit} action="api/SampleData/EditNode" method="put">
-            <div style = {this.getStyle()}>
-                <Button variant = "primary" name = "Back" onClick = {this.handleBack}>Back</Button>
-                <p>
-                    Title: {" "}
-                    <input type = "text" name = "title" value = {this.state.title} onChange = {this.handleTitleChange}/>
-                    {"     Date: "}
-                    <input type = "date" name = "date" required= "required" value= {new Date(this.state.date).toISOString().substr(0,10)} onChange = {this.handleDateChange}/>
-                    {"     Markdown: "}
-                    <input type = "checkbox" name = "markdown" defaultChecked={this.state.isMarkdown} onChange={this.handleIsMarkdownChange}/>
-                </p>
-                <textarea name = "text" value={this.state.text} onChange = {this.handleTextChange}/>
-                <p>
-                    <input type = "text" name = "category" onChange={this.handleTempCategoryChange}/>
-                    <select name = "categories">
-                        {this.state.categories.map((category)=>
-                        <option>
-                            {category}
-                        </option>)}
-                    </select>
-                    {"  "}
-                    <Button variant = "primary" name = "AddCategory" onClick = {this.handleAddCategory}>AddCategory</Button>
-                    <Button variant = "primary" name = "RemoveCategory" onClick = {this.handleRemoveCategory}>RemoveCategory</Button>
-                    {"   "}
-                    <Button variant = "primary" name = "submit" type = "submit">Submit</Button>
-
-
-                </p>
-
+            <div>
+                <form onSubmit={this.handleSubmit} action="api/SampleData/EditNode" method="put">
+                <div style = {this.getStyle()}>
+                    <Button variant = "primary" name = "Back" onClick = {this.handleBack}>Back</Button>
+                    <p>
+                        Title: {" "}
+                        <input type = "text" name = "title" value = {this.state.title} onChange = {this.handleTitleChange}/>
+                        {"     Date: "}
+                        <input type = "date" name = "date" required= "required" value= {new Date(this.state.date).toISOString().substr(0,10)} onChange = {this.handleDateChange}/>
+                        {"     Markdown: "}
+                        <input type = "checkbox" name = "markdown" defaultChecked={this.state.isMarkdown} onChange={this.handleIsMarkdownChange}/>
+                    </p>
+                    <textarea name = "text" value={this.state.text} style={{width:'100%', height:'400px'}} onChange = {this.handleTextChange}/>
+                    <p>
+                        <input type = "text" name = "category" onChange={this.handleTempCategoryChange}/>
+                        <select name = "categories">
+                            {this.state.categories.map((category)=>
+                            <option>
+                                {category}
+                            </option>)}
+                        </select>
+                        {"  "}
+                        <Button variant = "primary" name = "AddCategory" onClick = {this.handleAddCategory}>AddCategory</Button>
+                        <Button variant = "primary" name = "RemoveCategory" onClick = {this.handleRemoveCategory}>RemoveCategory</Button>
+                        {"   "}
+                        <Button variant = "primary" name = "submit" type = "submit">Submit</Button>
+    
+    
+                    </p>
+    
+                </div>
+                </form>
             </div>
-            </form>
         )
     }
 }
