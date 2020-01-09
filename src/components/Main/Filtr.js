@@ -8,9 +8,11 @@ class Filtr extends Component {
  
     constructor(props) {
         super(props);
-        this.state = {fromDate: new Date(),
-            toDate: new Date(),
-            filterCategory: '',}
+        this.state = {
+            fromDate: this.props.fromDate,
+            toDate: this.props.toDate,
+            filterCategory: '',
+        }
     }
     
     
@@ -60,17 +62,17 @@ class Filtr extends Component {
                     <tr>
                         <th>
                             From:
-                            <input type = "date" name = "from" value = {new Date(this.state.fromDate).toISOString().substr(0,10)} onChange={this.handleFromChange} />
+                            <input type = "date" name = "from" required="required" value = {new Date(this.state.fromDate).toISOString().substr(0,10)} onChange={this.handleFromChange} />
                         </th>
 
                         <th>
                             To:
-                            <input type = "date" name = "to" value = {new Date(this.state.toDate).toISOString().substr(0,10)} onChange={this.handleToChange}/>
+                            <input type = "date" name = "to" required="required" value = {new Date(this.state.toDate).toISOString().substr(0,10)} onChange={this.handleToChange}/>
                         </th>
                         <th>
                             Category:
                             <select name = "category" onChange={this.handleCategoryChange}>
-                                <option value="none">{''}</option>
+                                <option value=''>{''}</option>
                                 {this.props.categories.map((category)=>
                                         <option>
                                             {category}

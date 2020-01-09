@@ -39,9 +39,9 @@ class Notes extends Component {
     };
      
     render (){
-        this.updatePage();
         return(
             <div>
+                
                 <Table striped bordered hover>
                     <thead>
                     <tr>
@@ -54,7 +54,6 @@ class Notes extends Component {
                     </thead>
                     <tbody>
                         {
-                            
                             this.props.notes.filter(this.isOnPage).map((note)=>
                                 <NoteItem key ={note.id} 
                                           note = {note}

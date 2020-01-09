@@ -94,7 +94,7 @@ class EditPage extends Component {
                     Title: {" "}
                     <input type = "text" name = "title" value = {this.state.title} onChange = {this.handleTitleChange}/>
                     {"     Date: "}
-                    <input type = "date" name = "date" value= {new Date(this.state.date).toISOString().substr(0,10)} onChange = {this.handleDateChange}/>
+                    <input type = "date" name = "date" required= "required" value= {new Date(this.state.date).toISOString().substr(0,10)} onChange = {this.handleDateChange}/>
                     {"     Markdown: "}
                     <input type = "checkbox" name = "markdown" defaultChecked={this.state.isMarkdown} onChange={this.handleIsMarkdownChange}/>
                 </p>

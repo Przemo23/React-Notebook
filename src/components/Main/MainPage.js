@@ -9,7 +9,7 @@ import EditPage from "../Edit/EditPage";
 export class MainPage extends Component {
     constructor(props) {
         super(props);
-        this.state = {notes: [],categories:[],loading:true,fromFilter:'',toFilter: '',categoryFilter: '',isFilterOn: '',editedNote: 0,page:1};
+        this.state = {notes: [],categories:[],loading:true,fromFilter:new Date(),toFilter: new Date(),categoryFilter: '',isFilterOn: '',editedNote: 0,page:1};
 
         fetch('api/SampleData/AllNotes')
             .then(response => response.json())
@@ -18,7 +18,7 @@ export class MainPage extends Component {
                                     loading: false,
                                     fromFilter: new Date(),
                                     toFilter: new Date(),
-                                    categoryFilter: "none",
+                                    categoryFilter: '',
                                     isFilterOn: false,
                 });
             });
@@ -35,10 +35,10 @@ export class MainPage extends Component {
     };
     month = (date) => {
         return parseInt(date.toISOString().substr(5,2),10)
-    }
+    };
     day = (date) => {
         return parseInt(date.toISOString().substr(8,2),10)
-    }  
+    };
     isAboveLowerDate = (date) =>{
         const fromDate = new Date(this.state.fromFilter);
         if(this.year(date)> this.year(fromDate)){
@@ -135,14 +135,20 @@ export class MainPage extends Component {
 
     };
     deleteNote = (id) => {
+        console.log(id);
         this.setState({
             notes: this.state.notes.filter(note=>note.id !== id)
         });
-      //  axios.delete("api/SampleData/DeleteNode",id)
-        //    .then(response=>console.log(response))
+       /*
+        var data = new FormData(JSON.stringify(id));
+        fetch("api/SampleData/DeleteNote", {
+            method: 'DELETE', // *GET, POST, PUT, DELETE, etc.
+            
+            body: data
+        }).then(response => response.json());*/
     };
     addNewNote = () => {
-        const newID = this.state.notes[this.state.notes.length-1].id + 1;
+        const newID = this.state.notes.length > 0 ? this.state.notes[this.state.notes.length-1].id + 1 : 1;
         this.setState({
             notes:this.state.notes.concat({
                 id:newID,

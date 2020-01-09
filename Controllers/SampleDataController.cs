@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using Notebook.Models;
 
 namespace Notebook.Controllers
@@ -48,11 +49,17 @@ namespace Notebook.Controllers
         }
         
         [HttpDelete("[action]")]
-        public void DeleteNote(int id)
+        public void DeleteNote(string idstring)
         {
-            Note deletedNote = Models.Notebook.AllNotes.Find(note => note.Id == id);
+            ID id = JsonConvert.DeserializeObject<ID>(idstring);
+            Note deletedNote = Models.Notebook.AllNotes.Find(note => note.Id == Int32.Parse(id.idString));
             deleteFile(deletedNote);
             Models.Notebook.AllNotes.Remove(deletedNote);
+        }
+
+        private class ID
+        {
+            public string idString { get; set; }
         }
 
         private void createFile(Note note)
