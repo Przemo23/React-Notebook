@@ -129,23 +129,44 @@ export class MainPage extends Component {
             }) : note),
             categories: this.state.categories.concat(categoriesToAdd),
         })
-        
-       
+
+        const data = JSON.stringify(this.prepareFormData( id,title,date,isMarkdown,content,categories));
+        fetch("api/SampleData/EditNote", {
+            method: 'PUT', // *GET, POST, PUT, DELETE, etc.
+            headers: {
+                'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
+                'Content-Type': 'application/json; charset=UTF-8'
+            },
+            body: data
+        }).then(response => response.json());
             
 
     };
+    prepareFormData(id,title,date,isMarkdown,content,categories) {
+        return {
+            Id: id+"",
+            Title: title,
+            Date: date,
+            IsMarkdown: isMarkdown,
+            Content: content,
+            Categories: categories
+        };
+    }
     deleteNote = (id) => {
         console.log(id);
         this.setState({
             notes: this.state.notes.filter(note=>note.id !== id)
         });
-       /*
-        var data = new FormData(JSON.stringify(id));
+        
+        const data = JSON.stringify({"idstring": id+""});
         fetch("api/SampleData/DeleteNote", {
             method: 'DELETE', // *GET, POST, PUT, DELETE, etc.
-            
+            headers: {
+                'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
+                'Content-Type': 'application/json; charset=UTF-8'
+            },
             body: data
-        }).then(response => response.json());*/
+        }).then(response => response.json());
     };
     addNewNote = () => {
         const newID = this.state.notes.length > 0 ? this.state.notes[this.state.notes.length-1].id + 1 : 1;
@@ -160,6 +181,15 @@ export class MainPage extends Component {
                 categories:['']}),
             editedNote: newID,
         })
+        const data = JSON.stringify(this.prepareFormData( newID,'NewNote',new Date(),false,'content',['']));
+        fetch("api/SampleData/CreateNote", {
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            headers: {
+                'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
+                'Content-Type': 'application/json; charset=UTF-8'
+            },
+            body: data
+        }).then(response => response.json());
     };
   render () {
       console.log(this.state);

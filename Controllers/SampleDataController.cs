@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Notebook.Models;
 
+
 namespace Notebook.Controllers
 {
     [Route("api/[controller]")]
@@ -25,7 +26,7 @@ namespace Notebook.Controllers
         }
 
         [HttpPost("[action]")]
-        public void CreateNote([Bind("Categories, Title, Content, Date, IsMarkdown")]  Note note)
+        public void CreateNote([FromBody]Note note)
         {
             Note newNote = new Note(note);
             for (int i = 1; !isTitleUnique(newNote); i++)
@@ -37,7 +38,7 @@ namespace Notebook.Controllers
 
 
         [HttpPut("[action]")]
-        public void EditNote([Bind("Categories, Title, Content, Date, IsMarkdown, ID")] Note note)
+        public void EditNote([Bind("Categories, Title, Content, Date, IsMarkdown, ID")][FromBody]Note note)
         {
             Note updatedNote = Models.Notebook.AllNotes.Find(n => n.Id == note.Id);
             deleteFile(updatedNote);
@@ -49,18 +50,15 @@ namespace Notebook.Controllers
         }
         
         [HttpDelete("[action]")]
-        public void DeleteNote(string idstring)
+        public void DeleteNote([FromBody]Delete model)
         {
-            ID id = JsonConvert.DeserializeObject<ID>(idstring);
-            Note deletedNote = Models.Notebook.AllNotes.Find(note => note.Id == Int32.Parse(id.idString));
+            int noteId = Int32.Parse(model.IdString);
+            Note deletedNote = Models.Notebook.AllNotes.Find(note => note.Id == noteId);
             deleteFile(deletedNote);
             Models.Notebook.AllNotes.Remove(deletedNote);
         }
 
-        private class ID
-        {
-            public string idString { get; set; }
-        }
+      
 
         private void createFile(Note note)
         {
