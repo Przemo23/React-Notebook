@@ -43,12 +43,12 @@ class Notes extends Component {
             <div>
                 
                 <Table  bordered >
-                    <thead style={{backgroundColor:'grey'}}>
+                    <thead >
                     <tr>
                         <th style={{width:'120px'}}>Date</th>
                         <th>Title</th>
                         <th style={{width:'170px'}}>
-                            <Button variant="success" name = "AddNew" onClick = {this.props.addNewNote}>New Note</Button> 
+                            <Button variant="primary" name = "AddNew" onClick = {this.props.addNewNote}>New Note</Button> 
                         </th>
                     </tr>
                     </thead>
@@ -64,8 +64,8 @@ class Notes extends Component {
                     </tbody>
                 </Table>
                 <div style={{textAlign:'right'}}>
-                    <Button variant="secondary" name = "previousPage" onClick = {this.prev}>Previous Page</Button>
-                    <Button variant="secondary" name = "nextPage" onClick = {this.next}>Next Page</Button>
+                    <Button variant="primary" name = "previousPage" onClick = {this.prev}>Previous Page</Button>
+                    <Button variant="primary" name = "nextPage" onClick = {this.next}>Next Page</Button>
                </div>
             </div>
         )

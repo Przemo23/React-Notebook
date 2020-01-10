@@ -12,7 +12,8 @@ namespace Notebook.Models
         public DateTime Date { get; set; }
         public string DateFormatted { get; set; }
         public string FileType { get; set; }
-        public int Id { get; }
+        public string IdString { get; set; }
+        public int Id { get; set; }
         
         public bool IsMarkdown { get; set; }
 
@@ -40,6 +41,7 @@ namespace Notebook.Models
             this.Date = note.Date;
             this.DateFormatted = note.DateFormatted;
             this.FileType = this.IsMarkdown == true ? "md" : "txt";
+            this.IsMarkdown = this.IsMarkdown;
         }
     }
 }

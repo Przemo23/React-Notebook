@@ -16,13 +16,7 @@ class Filtr extends Component {
     }
     
     
-    getStyle = () =>{
-        return {
-            backgroundColor: '#f4f4f4',
-            padding: '10px',
-            borderBottom:'1px #ccc dotted',
-        }
-    };
+ 
     
     handleFromChange = (event) =>{
         this.setState({
@@ -80,8 +74,8 @@ class Filtr extends Component {
                             </select>
                         </th>
                         <th>
-                            <Button variant = "secondary" type = "submit">Filter</Button>
-                            <Button variant = "secondary" onClick = {this.handleDeleteFilter}>Clear</Button>
+                            <Button variant = "primary" type = "submit">Filter</Button>
+                            <Button variant = "primary" onClick = {this.handleDeleteFilter}>Clear</Button>
                         </th>
                     </tr>
                     </thead>

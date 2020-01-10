@@ -11,8 +11,8 @@ class Pagination extends Component {
         return(
 
             <div>
-                <Button variant="primary" name = "previousPage">PreviousPage</Button>
-                <Button variant="primary" name = "nextPage">Next Page</Button>
+                <Button variant = "primary" name = "previousPage">PreviousPage</Button>
+                <Button variant = "primary" name = "nextPage">Next Page</Button>
             </div>
         )
     }

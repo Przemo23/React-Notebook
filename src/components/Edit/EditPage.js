@@ -41,7 +41,7 @@ class EditPage extends Component {
     };
     handleIsMarkdownChange = (event) =>{
         this.setState({
-            isMarkdown: event.target.value
+            isMarkdown: !this.state.isMarkdown
         })
     };
     handleTextChange = (event) =>{

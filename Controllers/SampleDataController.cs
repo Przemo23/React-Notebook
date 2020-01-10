@@ -28,6 +28,7 @@ namespace Notebook.Controllers
         [HttpPost("[action]")]
         public void CreateNote([FromBody]Note note)
         {
+            note.Id = Int32.Parse(note.IdString);
             Note newNote = new Note(note);
             for (int i = 1; !isTitleUnique(newNote); i++)
                 newNote.Title = note.Title + "(" + i + ")";
@@ -39,6 +40,7 @@ namespace Notebook.Controllers
         [HttpPut("[action]")]
         public void EditNote([FromBody]Note note)
         {
+            note.Id = Int32.Parse(note.IdString);
             Note updatedNote = Models.Notebook.AllNotes.Find(n => n.Id == note.Id);
             deleteFile(updatedNote);
             updatedNote.update(note);
