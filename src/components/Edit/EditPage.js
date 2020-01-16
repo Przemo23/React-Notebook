@@ -56,7 +56,7 @@ class EditPage extends Component {
     };
     handleAddCategory = () =>{
         
-        if(this.state.categories.some(cat => cat !== this.state.tempCategory)){
+        if(this.state.categories.some(cat => cat !== this.state.tempCategory) && this.state.categories.filter( i => i === this.state.tempCategory ).length === 0){
             this.setState({
                 categories:  this.state.categories.concat( this.state.tempCategory)
             })
@@ -67,9 +67,12 @@ class EditPage extends Component {
     };
     handleRemoveCategory = () =>{
         if(this.state.categories.some(cat => cat === this.state.tempCategory)){
-            this.setState({
-                categories:  this.state.categories.filter( i => i !== this.state.tempCategory )
-            })
+            if(!(this.state.tempCategory === '' && this.state.categories.length === 1)) {
+                this.setState({
+                    categories: this.state.categories.filter(i => i !== this.state.tempCategory)
+
+                })
+            }
         }
     };
     handleSubmit = (event) =>{

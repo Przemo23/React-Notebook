@@ -75,7 +75,7 @@ class Filtr extends Component {
                         </th>
                         <th>
                             <Button variant = "primary" type = "submit">Filter</Button>
-                            <Button variant = "primary" onClick = {this.handleDeleteFilter}>Clear</Button>
+                            <Button variant = "danger" onClick = {this.handleDeleteFilter}>Disable Filter</Button>
                         </th>
                     </tr>
                     </thead>
